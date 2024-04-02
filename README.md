@@ -21,15 +21,13 @@ For my Sophmore project, I recreated the classic pong using DarkGDK.
 I followed this tuturial on how to download VS Community 2017 and DarkGDK.
 [https://servicedesk.snc.edu/hc/en-us/articles/360034544854-Computer-Science-Installing-DarkGDK] (VS Community Totural)
 
-Drag all of the pong files into sncDarkGDK2017 project.
+- Drag all of the pong files into sncDarkGDK2017 project.
+- Copy all of the code in the `main.cpp` file and paste it into `DarkGDK2017start.cpp`
+- Place the png_files into the sncDarkGDK2017 project.
+- Place d3dx9_35.dll in C:\Windows\SysWOW64
 
-Copy all of the code in the `main.cpp` file and paste it into `DarkGDK2017start.cpp`
+### P.S.
 
-Place the png_files into the sncDarkGDK2017 project.
+Please drop me a note with any feedback you have.
 
-
-
-
-
-
-Place d3dx9_35.dll in C:\Windows\SysWOW64
+**Joel**
