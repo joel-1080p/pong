@@ -17,7 +17,7 @@ For my Sophmore project, I recreated the classic pong using DarkGDK.
 - Run the `pong.exe` file.
 
 
-### Download to contribute
+### **Download to contribute**
 I followed this tuturial on how to download VS Community 2017 and DarkGDK.
 [https://servicedesk.snc.edu/hc/en-us/articles/360034544854-Computer-Science-Installing-DarkGDK] (VS Community Totural)
 
