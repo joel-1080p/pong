@@ -1,7 +1,7 @@
 # Pong
 For my Sophmore project, I recreated the classic pong using DarkGDK.
 
-## How To Play
+### How To Play
 - Press Space Bar to start the game.
 - Player 1 is the left paddle and NPC is on the right.
 - Press Return to pause the game
