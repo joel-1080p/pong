@@ -25,7 +25,8 @@ I followed this tuturial on how to download VS Community 2017 and DarkGDK.
 - Copy all of the code in the `main.cpp` file and paste it into `DarkGDK2017start.cpp`
 - Place the png_files into the sncDarkGDK2017 project.
 - Place d3dx9_35.dll in C:\Windows\SysWOW64
----
+
+
 ## P.S.
 
 Please drop me a note with any feedback you have.
