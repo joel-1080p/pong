@@ -19,7 +19,7 @@ For my Sophmore project, I recreated the classic pong using DarkGDK.
 
 ### Download to contribute
 I followed this tuturial on how to download VS Community 2017 and DarkGDK.
-[https://servicedesk.snc.edu/hc/en-us/articles/360034544854-Computer-Science-Installing-DarkGDK] (VS Community Totural)
+[VS Community Totural With DarkGDK](https://servicedesk.snc.edu/hc/en-us/articles/360034544854-Computer-Science-Installing-DarkGDK)
 
 - Drag all of the pong files into sncDarkGDK2017 project.
 - Copy all of the code in the `main.cpp` file and paste it into `DarkGDK2017start.cpp`
