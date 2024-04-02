@@ -1,4 +1,4 @@
-### Pong
+# Pong
 For my Sophmore project, I recreated the classic pong using DarkGDK.
 
 
