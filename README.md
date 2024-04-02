@@ -6,6 +6,7 @@ For my Sophmore project, I recreated the classic pong using DarkGDK.
 - Player 1 is the left paddle and NPC is on the right.
 - Press Return to pause the game
 - If the game is paused, press arrow up or down to continue.
+- First to 7 wins!
 
 ![clipped (1)](https://github.com/joel-1080p/pong/assets/156847809/282e0efd-ee9a-453a-bfc3-3af6ec436b2d)
 
