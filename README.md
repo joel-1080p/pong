@@ -7,6 +7,8 @@ For my Sophmore project, I recreated the classic pong using DarkGDK.
 - Press Return to pause the game
 - If the game is paused, press arrow up or down to continue.
 
+![clipped (1)](https://github.com/joel-1080p/pong/assets/156847809/282e0efd-ee9a-453a-bfc3-3af6ec436b2d)
+
 ### Download To Play
 - Download the `pong.exe`, `png_files folder`, and `DLL Files folder`.
 - Put the `pong.exe` and the `png_files folder` into the same same directory.
