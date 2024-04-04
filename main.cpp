@@ -4,6 +4,8 @@
 #include "Game.h"
 #include "NPC.h"
 
+
+
 void DarkGDK(){
 	dbSyncOn;
 	dbSyncRate(60);
@@ -11,62 +13,46 @@ void DarkGDK(){
 	dbRandomize(dbTimer());
 
 	// Game objects.
-	Player1 Player1;
+	Player1 player1;
 	NPC npc;
 	Ball Ball;
 	Game game;
 
-	//Gets all Images for this game.
-	game.getImages();				
+	// Launches splash screen and loads all of the sprites.
+	game.loadGame();
 
-	//Shows "Pong, By....."
-	dbSprite(12, 0, 0, 9);			
-
-	//Wait 4 seconds
-	dbWait(4750);					
-
-	//Deletes "Pong, by...."
-	dbDeleteSprite(12);				
-
-	//Create Sprites
-	game.createGameSprites();
-
-	//Hide Sprites
-	game.hideAllGameSprites();
-
+	// Main game loop.
 	while (LoopGDK()){
 
-		// Places all of the sprites.
-		game.showAllGameSprites();
-
-		// If user presses return key, the game will pause
-		if (dbReturnKey())					
+		// If user presses return key, the game will pause.
+		if (dbReturnKey())
 			game.pause();
 
-		// Player objects and methods.
-		Player1.movement();
-		Player1.hittingTheBall();
-		Player1.score();
-		Player1.reset();
-		Player1.gameOver();
-		
-		// NPC objects and methods.
-		npc.movement();
+		// Player objects and functions.
+		player1.move();
+		player1.hittingTheBall();
+		player1.score();
+		player1.reset();
+
+		// NPC objects and functions.
+		npc.move();
 		npc.hittingTheBall();
 		npc.score();
 		npc.reset();
-		npc.gameOver();
 
-		// Ball objects and methods.
+		// Ball objects and functions.
 		Ball.movement();
 		Ball.collision();
 		Ball.goalCheck();
 		Ball.reset();
 
+		// Checks to see if there is a winner.
+		game.gameOver(npc, player1);
+
 		dbSync();
 	}
 
-	// If the game is over, will be clean up memory.
+	// If the game is over, clean up memory.
 	game.DeleteAllSprites();
 
 	dbWaitKey();

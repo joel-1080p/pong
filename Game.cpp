@@ -3,28 +3,42 @@
 
 
 
-// Game object constructors.
-Game::Game(){
+// Game object constructor.
+Game::Game(void){
 
 	// Pause screen set to off.
 	pause_button = 0;
 
-	// Default NPC speed.
-	npc_speed = 8;
-
-	// Default ball speed.
-	ball_speed = 9;
-
-	// Default player speed.
-	player_speed = 8;
+	return;
 }
 
 
+// Launches splash screen and loads all of the sprites.
+void Game::loadGame(void) {
+
+	//Gets all Images for this game.
+	getImages();
+
+	//Shows "Pong, By....."
+	dbSprite(12, 0, 0, 9);
+
+	//Wait 4 seconds
+	dbWait(4750);
+
+	//Deletes "Pong, by...."
+	dbDeleteSprite(12);
+
+	//Create Sprites
+	createGameSprites();
+
+	return;
+}
+
 
 // Loads images and assigns id.
-void Game::getImages( void){
+void Game::getImages(void){
 
-	// Gets all immages for this game as bmp. Size : 640 X 480.
+	// Gets all images for this game as bmp. Size : 640 X 480.
 	dbLoadImage("png_files/Background.bmp", 1);
 	dbLoadImage("png_files/Paddle.bmp", 2);
 	dbLoadImage("png_files/Ball.bmp", 3);
@@ -44,7 +58,7 @@ void Game::getImages( void){
 
 
 // Creates sprites for this game.
-void Game::createGameSprites( void){
+void Game::createGameSprites(void){
 	dbSprite(1, 0, 0, 1);			// Game wallpaper
 	dbSprite(2, 25, 220, 2);		// Player 1
 	dbSprite(3, 610, 220, 2);		// NPC
@@ -55,50 +69,17 @@ void Game::createGameSprites( void){
 	dbSprite(8, 648, 0, 5);			// Right wall
 	dbSprite(9, 135, 30, 6);		// Player 1 Score
 	dbSprite(10, 455, 30, 6);		// NPC Score
+	//dbSprite(11, x, y, 7);		// Winner Banner [CREATED LATER]
+	//dbSprite(12, 0, 0, 10);		// Pause screen sprite [CREATED LATER]
 
 	return;
 }
 
 
 
-// Hides all sprites while initial loading screen.
-void Game::hideAllGameSprites( void){
-	dbHideSprite(1);			//Wallpaper
-	dbHideSprite(2);			//Player1
-	dbHideSprite(3);			//Player2
-	dbHideSprite(4);			//Ball
-	dbHideSprite(5);			//Top border
-	dbHideSprite(6);			//Bottom border
-	dbHideSprite(7);			//Left wall
-	dbHideSprite(8);			//Right wall
-	dbHideSprite(9);			//Player 1 score
-	dbHideSprite(10);			//Player 2 score		
-	return;
-}
-
-
-
-// Show all sprites afrer loading screen is done.
-void Game::showAllGameSprites( void){
-	dbShowSprite(1);			// Wallpaper
-	dbShowSprite(2);			// Player 1
-	dbShowSprite(3);			// NPC
-	dbShowSprite(4);			// Ball
-	dbShowSprite(5);			// Top border
-	dbShowSprite(6);			// Bottom border
-	dbShowSprite(7);			// Left wall
-	dbShowSprite(8);			// Right wall
-	dbShowSprite(9);			// Player 1 score
-	dbShowSprite(10);			// Player 2 score
-	return;
-}
-
-
-
-// Deletes all the sprites.
-void Game::DeleteAllSprites( void){
-	for(int i = 1; i <= 20; i++)
-	{
+// Deletes all the sprites to clean memory. 
+void Game::DeleteAllSprites(void){
+	for(int i = 1; i <= 20; i++){
 		dbDeleteImage(i);
 		dbDeleteSprite(i);
 	}
@@ -108,41 +89,79 @@ void Game::DeleteAllSprites( void){
 
 
 // Shows or removes pause screen after hitting space bar.
-void Game::pause(){
+void Game::pause(void){
+
+	// If pause screen is already showing, unpause.
+	if (pause_button != 0) {
+		pause_button = 0;
+		return;
+	}
 
 	// If pause screen is not showing.
-	if(pause_button == 0){
-		pause_button = 1;
+	pause_button = 1;
 
-		//Creates pause menu sprite.
-		dbSprite(17, 0, 0, 10);
+	//Creates pause menu sprite.
+	dbSprite(12, 0, 0, 10);
 
-		// Waits for user input.
-		dbWaitKey();
+	// Waits for user input.
+	dbWaitKey();
 
-		//Deletes pause menu sprite.
-		dbDeleteSprite(17);
-
-	}
-
-	// If pause screen is already showing.
-	else{
-		pause_button = 0;
-	}
-
+	//Deletes pause menu sprite.
+	dbDeleteSprite(12);
+	
 	return;
+
 }
 
 
 
 // Getter for pause variable.
-int Game::getPause(void)const{
+int Game::getPause(void){
 	return pause_button;
 }
 
 
 
 // Setter for pause variable.
-void Game::changePause(int x){
+void Game::setPause(int x){
 	pause_button = x;
+	return;
+}
+
+
+
+// Checks if either NPC or Player 1 has won.
+// If so, reset all of the sprites.
+void Game::gameOver(NPC& npc, Player1& player1) {
+
+	// If neither player 1 or npc has won the game.
+	if (npc.getCurrentScore() != 8 && player1.getCurrentScore() != 8 ) {
+		return;
+	}
+
+	// If player 1 wins the game, show banner.
+	if (player1.getCurrentScore() == 8) {
+		dbSprite(11, 63, 100, 7);
+	}
+	// If npc wins the game, show banner.
+	else {
+		dbSprite(11, 400, 100, 7);
+	}
+
+	// If the user hits space to start a new game.
+	if (dbSpaceKey() == 1) {
+
+		// Deletes player winner banner.
+		dbDeleteSprite(11);
+
+		// Reset player scores.
+		player1.setCurrentScore(1);
+		npc.setCurrentScore(1);
+
+		// Resets the score printed on the screen for both players.
+		dbSetSpriteFrame(player1.getScoreSprite(), player1.getCurrentScore());
+		dbSetSpriteFrame(npc.getScoreSprite(), npc.getCurrentScore());
+	}
+
+	return;
 }
